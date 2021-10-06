@@ -10,7 +10,7 @@ def record(outputFile):
   fs = 44100 # sampling freq. = cycles/sec
   record_seconds = 5 # record audio for 5 sec
 
-  p = pyaudio.PyAudio()
+  p = pyaudio.PyAudio() # creates a pyaudio instance
   print("*recording")
 
   # open stream object as input
@@ -27,13 +27,14 @@ def record(outputFile):
     frames.append(data)
 
   
-
+  # stop/close stream
   stream.stop_stream()
   stream.close()
   p.terminate()
 
   print("*done recoring")
 
+  # save recorded data as WAV file
   wf = wave.open(outputFile, 'wb')
   wf.setnchannels(num_channels)
   wf.setsampwidth(p.get_sample_size(sample_format))
